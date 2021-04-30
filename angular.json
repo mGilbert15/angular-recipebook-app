@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-recipebook-app": {
-      "rojectType": "application",
+      "projectType": "application",
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
