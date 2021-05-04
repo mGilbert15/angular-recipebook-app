@@ -1,9 +1,10 @@
-<app-header></app-header>
+<app-header (changeDisplay)="onChangeDisplay($event)"></app-header>
 <div class="container">
   <div class="row">
+    <!--Only display the recipe or shopping list page based on what current display is set to-->
     <div class="col-md-12">
-      <app-recipes></app-recipes>
-      <app-shopping-list></app-shopping-list>
+      <app-recipes *ngIf="display === 'recipes'"></app-recipes>
+      <app-shopping-list *ngIf="display === 'shopping'"></app-shopping-list>
     </div>
   </div>
 </div>
