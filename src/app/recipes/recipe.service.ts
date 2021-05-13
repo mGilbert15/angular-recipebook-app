@@ -40,6 +40,15 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
+  /**
+   * Retrieves a single recipe based on an id/index.
+   * @param id The index the recipes array where the recipe resides
+   * @returns the recipe with specified id
+   */
+  getRecipe(id: number) {
+    return this.recipes[id];
+  }
+
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
   }
