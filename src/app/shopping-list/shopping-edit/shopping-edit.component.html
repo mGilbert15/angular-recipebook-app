@@ -1,15 +1,38 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form #itemForm="ngForm" (ngSubmit)="onAddItem()">
       <!--Name of Ingredient input-->
       <div class="col-sm-5 form-group">
         <label for="name">Name</label>
-        <input type="text" id="name" class="form-control" #nameInput />
+        <input
+          class="form-control"
+          id="name"
+          ngModel
+          #name="ngModel"
+          name="name"
+          required
+          type="text"
+        />
+        <span *ngIf="!name.valid && name.touched" class="help-block">
+          name is required</span
+        >
       </div>
       <!--Amount of Ingredient input-->
       <div class="col-sm-2 form-group">
         <label for="amount">Amount</label>
-        <input type="number" id="amount" class="form-control" #amountInput />
+        <input
+          class="form-control"
+          id="amount"
+          ngModel
+          #amount="ngModel"
+          name="amount"
+          pattern="^[1-9]+[0-9]*$"
+          required
+          type="number"
+        />
+        <span *ngIf="!amount.valid && amount.touched" class="help-block">
+          amount is required and must be a positive whole number</span
+        >
       </div>
       <div class="row">
         <div class="col-xs-12">
@@ -17,7 +40,7 @@
             class="btn btn-success"
             style="margin-right: 3px"
             type="submit"
-            (click)="onAddItem()"
+            [disabled]="!itemForm.valid"
           >
             Add
           </button>
