@@ -11,7 +11,9 @@
         >
           Save
         </button>
-        <button class="btn btn-danger" type="button">Cancel</button>
+        <button class="btn btn-danger" type="button" (click)="onCancel()">
+          Cancel
+        </button>
       </div>
       <!--Name field-->
       <div class="row">
@@ -90,7 +92,13 @@
               </div>
               <!--Delete Ingredient Button-->
               <div class="col-xs-2">
-                <button class="btn btn-danger" type="button">X</button>
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  (click)="deleteIngredient(i)"
+                >
+                  X
+                </button>
               </div>
             </div>
             <hr />

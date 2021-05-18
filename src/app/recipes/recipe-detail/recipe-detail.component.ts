@@ -18,6 +18,9 @@ export class RecipeDetailComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  /**
+   * Subscribes to any changes in the route parameters.
+   */
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -25,11 +28,25 @@ export class RecipeDetailComponent implements OnInit {
     });
   }
 
+  /**
+   * Adds ingredients that belong to a to the shopping list.
+   */
   onAddToShoppingList() {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
   }
 
+  /**
+   * Navigates to the edit page.
+   */
   onEditRecipe() {
     this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+
+  /**
+   * Deletes the currently selected recipe.
+   */
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes']);
   }
 }
