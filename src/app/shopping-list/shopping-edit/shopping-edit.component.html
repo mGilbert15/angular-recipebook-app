@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form #itemForm="ngForm" (ngSubmit)="onAddItem()">
+    <form #itemForm="ngForm" (ngSubmit)="onSubmit()">
       <!--Name of Ingredient input-->
       <div class="col-sm-5 form-group">
         <label for="name">Name</label>
@@ -55,6 +55,7 @@
             class="btn btn-primary"
             style="margin-right: 3px"
             type="button"
+            (click)="onClearItem()"
           >
             Clear
           </button>
