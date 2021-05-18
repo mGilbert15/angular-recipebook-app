@@ -42,7 +42,7 @@
             type="submit"
             [disabled]="!itemForm.valid"
           >
-            Add
+            {{ editMode ? "Update" : "Add" }}
           </button>
           <button
             class="btn btn-danger"
