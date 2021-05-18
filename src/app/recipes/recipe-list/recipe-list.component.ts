@@ -7,7 +7,7 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css'],
 })
-export class RecipeListComponent implements OnInit, OnDestroy {
+export class RecipeListComponent implements OnInit {
   recipes: Recipe[];
 
   constructor(
@@ -32,12 +32,5 @@ export class RecipeListComponent implements OnInit, OnDestroy {
    */
   onClickNewRecipe() {
     this.router.navigate(['new'], { relativeTo: this.route });
-  }
-
-  /**
-   * Unsubscribes to all subscriptions.
-   */
-  ngOnDestroy() {
-    this.recipeService.recipesChanged.unsubscribe();
   }
 }

@@ -38,6 +38,7 @@
               type="text"
               id="imagePath"
               formControlName="imagePath"
+              #imagePath
               class="form-control"
             />
           </div>
@@ -46,7 +47,11 @@
       <!--Image Preview-->
       <div class="row">
         <div class="col-xs-12">
-          <img src="" class="img-response" />
+          <img
+            [src]="imagePath.value"
+            class="img-response"
+            style="max-width: 500px"
+          />
         </div>
       </div>
       <!--Description field-->
