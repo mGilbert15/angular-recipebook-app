@@ -18,15 +18,20 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   constructor(private shoppingListService: ShoppingListService) {}
 
+  /**
+   * Set's up subscription to Shopping List started Editing. Set's form accordingly if in edit mode.
+   */
   ngOnInit(): void {
     this.subscription = this.shoppingListService.startedEditing.subscribe(
       (id: number) => {
+        //sets edit mode values
         this.editMode = true;
         this.editedItemIndex = id;
         this.editedItem = this.shoppingListService.getIngredient(
           this.editedItemIndex
         );
 
+        //sets form values if in edit mode
         this.form.setValue({
           name: this.editedItem.name,
           amount: this.editedItem.amount,
@@ -35,26 +40,36 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * When user submits for if in edit mode edits the selected ingredient. If in Add mode adds new ingredient based on form entry.
+   */
   onSubmit() {
+    //creates ingredient based on form input
     const newIngredient = new Ingredient(
       this.form.value.name,
       this.form.value.amount
     );
 
     if (this.form.valid) {
+      //in edit mode updates selected ingredient
       if (this.editMode) {
         this.shoppingListService.updateIngredient(
           this.editedItemIndex,
           newIngredient
         );
       } else {
+        //adds new ingredient
         this.shoppingListService.addIngredient(newIngredient);
       }
 
+      //clears form
       this.onClearItem();
     }
   }
 
+  /**
+   * Clears the form and resets values set in edit mode.
+   */
   onClearItem() {
     this.editMode = false;
     this.editedItemIndex = null;
@@ -62,11 +77,17 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.form.reset();
   }
 
+  /**
+   * Deletes selected ingredient item.
+   */
   onDeleteItem() {
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
-    this.onClearItem();
+    this.onClearItem(); //clears form
   }
 
+  /**
+   * Cleans up subscriptions.
+   */
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
