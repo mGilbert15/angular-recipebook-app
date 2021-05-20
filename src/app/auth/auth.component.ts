@@ -9,6 +9,8 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent implements OnInit {
   isLoginMode: boolean = true;
+  isLoading: boolean = false;
+  error: string = null;
   formData: FormGroup;
 
   constructor(private authService: AuthService) {}
@@ -36,14 +38,19 @@ export class AuthComponent implements OnInit {
     const email = this.formData.value.email;
     const password = this.formData.value.password;
 
+    this.isLoading = true;
+
     //Signs up a user if they are not currently in login mode and submit the form
     if (!this.isLoginMode) {
       this.authService.signup(email, password).subscribe(
         (resData) => {
           console.log(resData);
+          this.isLoading = false;
         },
-        (error) => {
-          console.log(error);
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.error = errorMessage;
+          this.isLoading = false;
         }
       );
     }
