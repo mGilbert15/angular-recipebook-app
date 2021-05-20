@@ -14,8 +14,13 @@
       </div>
       <!--Buttons-->
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">Sign Up</button> |
-        <button class="btn btn-primary" type="button">Swtich to Login</button>
+        <button class="btn btn-primary" type="submit">
+          {{ isLoginMode ? "Login" : "Sign Up" }}
+        </button>
+        |
+        <button class="btn btn-primary" type="button" (click)="onSwitchMode()">
+          Switch to {{ isLoginMode ? "Sign up" : "Login" }}
+        </button>
       </div>
 
       <div></div>
