@@ -4,6 +4,7 @@ import { environment } from 'environments/environmnets.dev';
 import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 export interface AuthResponseData {
   kind: string;
@@ -19,7 +20,7 @@ export interface AuthResponseData {
 export class AuthService {
   user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   /**
    * Allows a user to sign up to the recipe service.
@@ -76,6 +77,21 @@ export class AuthService {
       );
   }
 
+  /**
+   * Logs out user and navigates back to authentication view.
+   */
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/auth']);
+  }
+
+  /**
+   * Helper method that helps handle user authentication.
+   * @param email the user's email
+   * @param userId the user's id
+   * @param token validation token
+   * @param expiresIn amount of time in which token will expire
+   */
   private handleAuthentication(
     email: string,
     userId: string,

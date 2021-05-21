@@ -40,7 +40,12 @@
       <!--Recipe Book Manager-->
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a style="cursor: pointer" *ngIf="isAuthenticated">Logout</a>
+          <a
+            style="cursor: pointer"
+            *ngIf="isAuthenticated"
+            (click)="onLogout()"
+            >Logout</a
+          >
         </li>
         <li class="dropdown" *ngIf="isAuthenticated" appDropdown>
           <a style="cursor: pointer" class="dropdown-toggle" role="button"
