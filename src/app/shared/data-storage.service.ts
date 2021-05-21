@@ -1,13 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environmnets.dev';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
-import { map, tap } from 'rxjs/operators';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
-  constructor(private http: HttpClient, private recipeService: RecipeService) {}
+  constructor(
+    private http: HttpClient,
+    private recipeService: RecipeService,
+    private authService: AuthService
+  ) {}
 
   /**
    * Stores the recipes from the recipe service into the backend database and prints out the response text.

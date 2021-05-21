@@ -17,10 +17,10 @@
     >
       <!--Switch between Views-->
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="isAuthenticated">
           <a style="cursor: pointer" routerLink="/recipes">Recipes</a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="!isAuthenticated">
           <a
             style="cursor: pointer"
             routerLink="/auth"
@@ -39,7 +39,10 @@
       </ul>
       <!--Recipe Book Manager-->
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" appDropdown>
+        <li>
+          <a style="cursor: pointer" *ngIf="isAuthenticated">Logout</a>
+        </li>
+        <li class="dropdown" *ngIf="isAuthenticated" appDropdown>
           <a style="cursor: pointer" class="dropdown-toggle" role="button"
             >Manage
             <span class="caret"></span>
